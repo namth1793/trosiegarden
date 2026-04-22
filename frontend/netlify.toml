@@ -2,6 +2,14 @@
   command = "npm run build"
   publish = "dist"
 
+# Proxy /api/* → Railway backend (thay YOUR-APP bằng URL Railway thực tế)
+[[redirects]]
+  from = "/api/*"
+  to = "https://YOUR-APP.up.railway.app/api/:splat"
+  status = 200
+  force = true
+
+# SPA fallback — phải đặt CUỐI CÙNG
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -86,10 +86,10 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-black/50"></div>
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                  <h1 className="text-white font-black text-3xl md:text-5xl leading-tight mb-4 max-w-4xl">
+                  <h1 className="hero-title text-white text-3xl md:text-5xl mb-5 max-w-4xl">
                     Xuất khẩu găng tay y tế, cà phê &amp; nông sản Việt Nam ra toàn cầu
                   </h1>
-                  <p className="text-gray-200 text-base md:text-lg max-w-2xl mb-8 leading-relaxed">
+                  <p className="hero-desc text-gray-200 text-base md:text-lg max-w-2xl mb-8">
                     Trosie Global là đối tác xuất khẩu uy tín từ Việt Nam, cung cấp sản phẩm chất lượng cao với giá cạnh tranh và giao hàng nhanh chóng đến thị trường quốc tế.
                   </p>
                   <div className="flex flex-wrap justify-center gap-4">

@@ -4,14 +4,17 @@ import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import GioiThieu from './pages/GioiThieu'
+import GangTayYTe from './pages/GangTayYTe'
+import CaPheDetail from './pages/CaPheDetail'
+import NongSan from './pages/NongSan'
+import OEM from './pages/OEM'
+import ChuoiCungUng from './pages/ChuoiCungUng'
+import ChungNhan from './pages/ChungNhan'
 import SanPham from './pages/SanPham'
 import SanPhamDetail from './pages/SanPhamDetail'
 import TinTuc from './pages/TinTuc'
 import TinTucDetail from './pages/TinTucDetail'
 import LienHe from './pages/LienHe'
-import CongNghe from './pages/CongNghe'
-import QuanHeCoDong from './pages/QuanHeCoDong'
-import CacToChucTaiChinh from './pages/CacToChucTaiChinh'
 
 export default function App() {
   return (
@@ -23,11 +26,14 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/gioi-thieu" element={<GioiThieu />} />
+            <Route path="/gang-tay-y-te" element={<GangTayYTe />} />
+            <Route path="/ca-phe" element={<CaPheDetail />} />
+            <Route path="/nong-san" element={<NongSan />} />
+            <Route path="/oem" element={<OEM />} />
+            <Route path="/chuoi-cung-ung" element={<ChuoiCungUng />} />
+            <Route path="/chung-nhan" element={<ChungNhan />} />
             <Route path="/san-pham" element={<SanPham />} />
             <Route path="/san-pham/:slug" element={<SanPhamDetail />} />
-            <Route path="/cong-nghe" element={<CongNghe />} />
-            <Route path="/cac-to-chuc-tai-chinh" element={<CacToChucTaiChinh />} />
-            <Route path="/quan-he-co-dong" element={<QuanHeCoDong />} />
             <Route path="/tin-tuc" element={<TinTuc />} />
             <Route path="/tin-tuc/:slug" element={<TinTucDetail />} />
             <Route path="/lien-he" element={<LienHe />} />

@@ -7,35 +7,22 @@ const navLinks = [
   {
     label: 'GIỚI THIỆU', to: '/gioi-thieu',
     children: [
-      { label: 'Giấy Chứng Nhận', to: '/gioi-thieu#chung-nhan' },
-      { label: 'Lịch sử phát triển', to: '/gioi-thieu#lich-su' },
-      { label: 'Ngành nghề kinh doanh', to: '/gioi-thieu#nganh-nghe' },
-      { label: 'Phương châm hoạt động', to: '/gioi-thieu#phuong-cham' },
+      { label: 'Tổng quan công ty', to: '/gioi-thieu' },
+      { label: 'Sứ mệnh & Tầm nhìn', to: '/gioi-thieu#su-menh' },
+      { label: 'Thế mạnh', to: '/gioi-thieu#the-manh' },
+      { label: 'Chứng nhận', to: '/chung-nhan' },
     ]
   },
   {
     label: 'SẢN PHẨM', to: '/san-pham',
     children: [
-      { label: 'Arabica', to: '/san-pham?category=arabica' },
-      { label: 'Robusta', to: '/san-pham?category=robusta' },
-      { label: 'Cà Phê Đặc Sản', to: '/san-pham?category=specialty' },
-      { label: 'Cà Phê Xay', to: '/san-pham?category=xay' },
-      { label: 'Cà Phê Hòa Tan', to: '/san-pham?category=hoa-tan' },
-      { label: 'Nhân Xanh', to: '/san-pham?category=xanh' },
-      { label: 'Cascara', to: '/san-pham?category=cascara' },
-      { label: 'Cà Phê Chồn', to: '/san-pham?category=chon' },
+      { label: '🧤 Găng Tay Y Tế', to: '/gang-tay-y-te' },
+      { label: '☕ Cà Phê', to: '/ca-phe' },
+      { label: '🌿 Nông Sản', to: '/nong-san' },
     ]
   },
-  { label: 'CÔNG NGHỆ', to: '/cong-nghe' },
-  { label: 'CÁC TỔ CHỨC TÀI CHÍNH', to: '/cac-to-chuc-tai-chinh' },
-  {
-    label: 'QUAN HỆ CỔ ĐÔNG', to: '/quan-he-co-dong',
-    children: [
-      { label: 'Thông báo', to: '/quan-he-co-dong#thong-bao' },
-      { label: 'Báo cáo tài chính', to: '/quan-he-co-dong#bao-cao' },
-      { label: 'Đại hội cổ đông', to: '/quan-he-co-dong#dai-hoi' },
-    ]
-  },
+  { label: 'OEM', to: '/oem' },
+  { label: 'CHUỖI CUNG ỨNG', to: '/chuoi-cung-ung' },
   {
     label: 'TIN TỨC', to: '/tin-tuc',
     children: [
@@ -79,11 +66,11 @@ export default function Navbar() {
         <div className="max-w-[1200px] mx-auto px-4 py-2 flex items-center justify-between gap-4">
           {/* Logo + company name */}
           <Link to="/" className="flex items-center gap-3 shrink-0">
-            <img src="/logo.png" alt="Trosie Garden" className="w-[70px] h-auto shrink-0" />
+            <img src="/logo.png" alt="Trosie Global" className="w-[70px] h-auto shrink-0" />
             <div className="hidden sm:block">
               <div className="text-[#6B2200] font-bold text-base leading-tight uppercase">CÔNG TY TNHH XUẤT NHẬP KHẨU</div>
               <div className="text-[#6B2200] font-bold text-base leading-tight uppercase">VÀ THƯƠNG MẠI TROSIE</div>
-              <div className="text-gray-500 text-xs">TROSIE GARDEN</div>
+              <div className="text-gray-500 text-xs">TROSIE GLOBAL</div>
             </div>
           </Link>
 
@@ -96,7 +83,7 @@ export default function Navbar() {
               </div>
               <div>
                 <div className="text-[10px] text-gray-500 uppercase font-semibold tracking-wider leading-none">HOTLINE</div>
-                <div className="font-bold text-base leading-tight">0912 355 703</div>
+                <div className="font-bold text-base leading-tight">+84 961 393 370</div>
               </div>
             </div>
 
@@ -116,7 +103,7 @@ export default function Navbar() {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                placeholder="search"
+                placeholder="Tìm kiếm"
                 className="px-2 py-1.5 text-xs outline-none w-28"
               />
               <button type="submit" className="bg-gray-100 border-l border-gray-300 px-2 py-1.5 hover:bg-gray-200">
@@ -157,7 +144,7 @@ export default function Navbar() {
 
                 {link.children && dropdown === link.label && (
                   <div
-                    className="absolute top-full left-0 bg-white shadow-lg border-t-2 border-[#6B2200] min-w-[200px] z-50"
+                    className="absolute top-full left-0 bg-white shadow-lg border-t-2 border-[#6B2200] min-w-[210px] z-50"
                     onMouseEnter={() => handleMouseEnter(link.label)}
                     onMouseLeave={handleMouseLeave}
                   >

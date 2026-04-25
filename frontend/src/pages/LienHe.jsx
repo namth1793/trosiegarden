@@ -40,23 +40,19 @@ export default function LienHe() {
       {/* Contact info cards */}
       <section className="py-12 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               {
-                icon: <FiMapPin size={24} />, title: 'Trụ sở chính',
-                lines: ['122-123 M2 Láng Trung', 'Phường Láng Hạ, Quận Đống Đa', 'Hà Nội, Việt Nam']
+                icon: <FiMapPin size={24} />, title: 'Địa chỉ',
+                lines: ['Km số 2, đường Hồ Chí Minh', 'Xã Khe Sanh, Tỉnh Quảng Trị', 'Việt Nam']
               },
               {
-                icon: <FiPhone size={24} />, title: 'Điện thoại',
-                lines: ['(024) 3835 9937', '(024) 3835 9936', 'Fax: (024) 3835 9935']
+                icon: <FiPhone size={24} />, title: 'Hotline',
+                lines: ['+84 961 393 370', 'Giờ làm việc:', 'T2–T7: 8:00 – 17:30']
               },
               {
                 icon: <FiMail size={24} />, title: 'Email',
-                lines: ['huan20000@gmail.com', 'Giờ làm việc:', 'T2-T6: 8:00 – 17:30']
-              },
-              {
-                icon: <FiMapPin size={24} />, title: 'Chi nhánh HCM',
-                lines: ['TP. Hồ Chí Minh', 'Hưng Yên (Nhà máy)', 'KCN Phố Nối A']
+                lines: ['trosiegardenks@gmail.com', 'Phản hồi trong:', '24 giờ làm việc']
               },
             ].map((item, i) => (
               <div key={i} className="bg-white rounded-lg p-6 border border-gray-200 hover:shadow-md transition-shadow text-center">
@@ -118,20 +114,24 @@ export default function LienHe() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-1">Chủ đề</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1">Sản phẩm quan tâm</label>
                     <select value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })}
                       className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#6B2200] rounded bg-white">
-                      <option value="">-- Chọn chủ đề --</option>
-                      <option>Yêu cầu báo giá sản phẩm</option>
-                      <option>Tìm hiểu về xuất khẩu cà phê</option>
-                      <option>Hợp tác phân phối</option>
-                      <option>Thông tin sản phẩm</option>
+                      <option value="">-- Chọn sản phẩm --</option>
+                      <option>Găng tay Nitrile</option>
+                      <option>Găng tay Latex</option>
+                      <option>Găng tay Vinyl</option>
+                      <option>Cà phê Arabica</option>
+                      <option>Cà phê Robusta</option>
+                      <option>Nông sản sấy (chuối, mít, xoài)</option>
+                      <option>Trái cây tươi xuất khẩu</option>
+                      <option>OEM / Thương hiệu riêng</option>
                       <option>Khác</option>
                     </select>
                   </div>
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-1">Nội dung *</label>
-                    <textarea required rows={5} placeholder="Mô tả chi tiết yêu cầu của bạn..." value={form.message}
+                    <textarea required rows={5} placeholder="Mô tả chi tiết yêu cầu, số lượng, thị trường..." value={form.message}
                       onChange={e => setForm({ ...form, message: e.target.value })}
                       className="w-full border border-gray-300 px-3 py-2.5 text-sm focus:outline-none focus:border-[#6B2200] rounded resize-none" />
                   </div>
@@ -147,12 +147,12 @@ export default function LienHe() {
 
             {/* Map + info */}
             <div>
-              <h2 className="section-title mb-6">Vị Trí Văn Phòng</h2>
+              <h2 className="section-title mb-6">Vị Trí Công Ty</h2>
               <div className="rounded-lg overflow-hidden shadow-md border border-gray-200 mb-6">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.1522042836684!2d105.8175!3d21.0186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDAxJzA3LjAiTiAxMDXCsDQ5JzAzLjAiRQ!5e0!3m2!1svi!2svn!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3774.5!2d106.7302!3d16.6255!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTbCsDM3JzMxLjgiTiAxMDbCsDQzJzQ4LjciRQ!5e0!3m2!1svi!2svn!4v1234567890"
                   width="100%" height="300" style={{ border: 0 }} allowFullScreen loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade" title="Trosie Garden location"
+                  referrerPolicy="no-referrer-when-downgrade" title="Trosie Global location"
                 ></iframe>
               </div>
 
@@ -162,20 +162,17 @@ export default function LienHe() {
                   <div className="flex items-start gap-3">
                     <FiMapPin className="text-amber-200 shrink-0 mt-1" />
                     <div>
-                      <p className="font-semibold text-white">Trụ sở chính – Hà Nội</p>
-                      <p className="text-gray-300">122-123 M2 Láng Trung, Phường Láng Hạ, Quận Đống Đa, Hà Nội</p>
+                      <p className="font-semibold text-white">Công ty TNHH XNK và Thương Mại Trosie</p>
+                      <p className="text-gray-300">Km số 2, đường Hồ Chí Minh, Xã Khe Sanh, Tỉnh Quảng Trị</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <FiPhone className="text-amber-200 shrink-0" />
-                    <div>
-                      <p className="text-gray-300">(024) 3835 9937 / (024) 3835 9936</p>
-                      <p className="text-gray-400 text-xs">Fax: (024) 3835 9935</p>
-                    </div>
+                    <a href="tel:+84961393370" className="text-gray-300 hover:text-white">+84 961 393 370</a>
                   </div>
                   <div className="flex items-center gap-3">
                     <FiMail className="text-amber-200 shrink-0" />
-                    <a href="mailto:huan20000@gmail.com" className="text-gray-300 hover:text-white">huan20000@gmail.com</a>
+                    <a href="mailto:trosiegardenks@gmail.com" className="text-gray-300 hover:text-white">trosiegardenks@gmail.com</a>
                   </div>
                 </div>
 
@@ -198,11 +195,11 @@ export default function LienHe() {
         <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-white">
             <p className="font-black text-xl">Sẵn sàng hợp tác xuất khẩu?</p>
-            <p className="text-gray-300 text-sm">Đội ngũ Trosie Garden luôn sẵn sàng hỗ trợ quý đối tác</p>
+            <p className="text-gray-300 text-sm">Đội ngũ Trosie Global luôn sẵn sàng hỗ trợ quý đối tác</p>
           </div>
-          <a href="tel:+842438359937"
+          <a href="tel:+84961393370"
             className="btn-accent flex items-center gap-2 whitespace-nowrap">
-            <FiPhone /> Gọi ngay: (024) 3835 9937
+            <FiPhone /> Gọi ngay: +84 961 393 370
           </a>
         </div>
       </section>

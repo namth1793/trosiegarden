@@ -36,6 +36,20 @@ const productCategories = [
     to: '/nong-san',
     icon: '🌿',
   },
+  {
+    name: 'Than Không Khói',
+    desc: 'Cháy lâu 2–4h, phù hợp BBQ, shisha & nhà hàng',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+    to: '/than-khong-khoi',
+    icon: '🔥',
+  },
+  {
+    name: 'Hoa Hồng Sấy Lạnh',
+    desc: 'Giữ màu tự nhiên, phù hợp quà tặng, decor & OEM',
+    image: 'https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=600&q=80',
+    to: '/hoa-hong-say-lanh',
+    icon: '🌹',
+  },
 ]
 
 const whyChooseUs = [
@@ -125,8 +139,34 @@ export default function Home() {
       {/* ===== DANH MỤC SẢN PHẨM ===== */}
       <section className="max-w-[1200px] mx-auto px-4 py-12">
         <h2 className="section-heading center text-center mb-8">DANH MỤC SẢN PHẨM</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {productCategories.map((cat) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+          {productCategories.slice(0, 3).map((cat) => (
+            <Link
+              key={cat.to}
+              to={cat.to}
+              className="group block overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow"
+            >
+              <div className="relative overflow-hidden" style={{ height: '220px' }}>
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors"></div>
+                <div className="absolute top-4 left-4 text-4xl">{cat.icon}</div>
+              </div>
+              <div className="p-5 bg-white">
+                <h3 className="font-black text-[#6B2200] text-xl mb-2">{cat.name}</h3>
+                <p className="text-gray-600 text-sm mb-3">{cat.desc}</p>
+                <span className="text-[#6B2200] text-sm font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Xem chi tiết <FiArrowRight />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:w-2/3 md:mx-auto">
+          {productCategories.slice(3).map((cat) => (
             <Link
               key={cat.to}
               to={cat.to}

@@ -19,6 +19,8 @@ const navLinks = [
       { label: '🧤 Găng Tay Y Tế', to: '/gang-tay-y-te' },
       { label: '☕ Cà Phê', to: '/ca-phe' },
       { label: '🌿 Nông Sản', to: '/nong-san' },
+      { label: '🔥 Than Không Khói', to: '/than-khong-khoi' },
+      { label: '🌹 Hoa Hồng Sấy Lạnh', to: '/hoa-hong-say-lanh' },
     ]
   },
   { label: 'OEM', to: '/oem' },

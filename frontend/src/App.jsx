@@ -14,6 +14,8 @@ import SanPham from './pages/SanPham'
 import SanPhamDetail from './pages/SanPhamDetail'
 import TinTuc from './pages/TinTuc'
 import TinTucDetail from './pages/TinTucDetail'
+import ThanKhongKhoi from './pages/ThanKhongKhoi'
+import HoaHongSayLanh from './pages/HoaHongSayLanh'
 import LienHe from './pages/LienHe'
 
 export default function App() {
@@ -36,6 +38,8 @@ export default function App() {
             <Route path="/san-pham/:slug" element={<SanPhamDetail />} />
             <Route path="/tin-tuc" element={<TinTuc />} />
             <Route path="/tin-tuc/:slug" element={<TinTucDetail />} />
+            <Route path="/than-khong-khoi" element={<ThanKhongKhoi />} />
+            <Route path="/hoa-hong-say-lanh" element={<HoaHongSayLanh />} />
             <Route path="/lien-he" element={<LienHe />} />
           </Routes>
         </main>

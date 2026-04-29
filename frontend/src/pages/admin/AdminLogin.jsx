@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default function AdminLogin() {
@@ -58,6 +58,11 @@ export default function AdminLogin() {
             {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
           </button>
         </form>
+        <div className="mt-4 text-center">
+          <Link to="/" className="text-sm text-gray-400 hover:text-[#6B2200] transition-colors">
+            ← Về trang chủ
+          </Link>
+        </div>
       </div>
     </div>
   )

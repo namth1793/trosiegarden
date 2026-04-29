@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiCheck, FiSend } from 'react-icons/fi'
 import axios from 'axios'
+import { usePageContent } from '../hooks/usePageContent'
 
 const products = [
   {
     name: 'Than Lục Giác (Hexagon)',
     badge: 'BEST SELLER',
     emoji: '🔥',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1602945072881-75915b0f641f?w=500&q=80',
     desc: 'Thiết kế lỗ thông khí giúp cháy đều, nhiệt ổn định, phù hợp BBQ & shisha chuyên nghiệp.',
     features: ['Lỗ thông khí', 'Cháy đều nhiệt ổn định', 'Phù hợp BBQ & shisha', 'Tro rất ít'],
   },
@@ -16,7 +17,7 @@ const products = [
     name: 'Than Viên Tròn',
     badge: '',
     emoji: '⚫',
-    image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1665791566407-22044ee904f3?w=500&q=80',
     desc: 'Dễ sử dụng, không cần dụng cụ đặc biệt, phù hợp nhu cầu gia đình và tiệc nhỏ.',
     features: ['Dễ sử dụng', 'Phù hợp gia đình', 'Kích thước đồng đều', 'Dễ bảo quản'],
   },
@@ -24,7 +25,7 @@ const products = [
     name: 'Than Que',
     badge: '',
     emoji: '🪵',
-    image: 'https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1559152620-1e10b5bf3c98?w=500&q=80',
     desc: 'Giải pháp kinh tế cho nhà hàng và quán nướng, số lượng lớn, tiết kiệm chi phí vận hành.',
     features: ['Dùng cho nhà hàng', 'Tiết kiệm chi phí', 'Cháy lâu bền', 'Số lượng lớn'],
   },
@@ -61,6 +62,7 @@ const supplyChain = [
 ]
 
 export default function ThanKhongKhoi() {
+  const { get } = usePageContent('than-khong-khoi')
   const [form, setForm] = useState({ name: '', company: '', country: '', product_type: '', quantity: '', contact: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -108,11 +110,12 @@ export default function ThanKhongKhoi() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-black text-gray-900 leading-tight mb-4">
-                Than không khói cao cấp –<br />
+                {get('hero_title', 'Than không khói cao cấp –')}
+                <br />
                 <span className="text-[#6B2200]">Cháy lâu, nhiệt cao, xuất khẩu toàn cầu</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Cung cấp than sạch, không khói, phù hợp BBQ, nhà hàng và shisha. Nguồn hàng ổn định, giá cạnh tranh trực tiếp từ Việt Nam.
+              <p className="text-gray-600 leading-relaxed mb-6 whitespace-pre-line">
+                {get('hero_desc', 'Cung cấp than sạch, không khói, phù hợp BBQ, nhà hàng và shisha. Nguồn hàng ổn định, giá cạnh tranh trực tiếp từ Việt Nam.')}
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href="#lead-form" className="bg-[#c41e3a] text-white px-6 py-3 font-bold hover:bg-red-700 transition-colors inline-flex items-center gap-2">
@@ -125,7 +128,7 @@ export default function ThanKhongKhoi() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80"
+                src={get('hero_image', 'https://images.unsplash.com/photo-1648090228825-e8fabeb09750?w=700&q=80')}
                 alt="Than không khói xuất khẩu"
                 className="rounded-lg shadow-xl w-full object-cover"
                 style={{ height: '360px' }}

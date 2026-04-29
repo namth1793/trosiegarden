@@ -2,12 +2,13 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiCheck, FiSend } from 'react-icons/fi'
 import axios from 'axios'
+import { usePageContent } from '../hooks/usePageContent'
 
 const products = [
   {
     name: 'Hoa Nguyên Bông',
     emoji: '🌹',
-    image: 'https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1607500105153-2da3f8c83050?w=500&q=80',
     desc: 'Giữ nguyên hình dáng và màu sắc hoàn hảo sau sấy lạnh. Lựa chọn hàng đầu cho quà tặng cao cấp.',
     features: ['Giữ nguyên hình dáng', 'Màu sắc tự nhiên', 'Phù hợp quà tặng', 'Bảo quản lâu dài'],
     uses: ['Quà tặng cao cấp', 'Hộp hoa lưu niệm'],
@@ -15,7 +16,7 @@ const products = [
   {
     name: 'Nụ Hoa',
     emoji: '🌸',
-    image: 'https://images.unsplash.com/photo-1490750967868-88df5691cc61?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1572890323975-5f4d74b7d6cb?w=500&q=80',
     desc: 'Kích thước nhỏ gọn, phù hợp pha trà hoa và trang trí sản phẩm mỹ phẩm tự nhiên.',
     features: ['Nhỏ gọn, tiện dùng', 'Phù hợp pha trà', 'Hương thơm giữ nguyên', 'Không hóa chất'],
     uses: ['Trà hoa hồng', 'Mỹ phẩm tự nhiên'],
@@ -23,7 +24,7 @@ const products = [
   {
     name: 'Cánh Hoa',
     emoji: '🌺',
-    image: 'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=500&q=80',
+    image: 'https://images.unsplash.com/photo-1731625342747-e16747098b60?w=500&q=80',
     desc: 'Cánh hoa rời dùng để trang trí và làm nguyên liệu sản xuất mỹ phẩm, bánh kẹo cao cấp.',
     features: ['Trang trí linh hoạt', 'Nguyên liệu mỹ phẩm', 'Kết cấu mềm tự nhiên', 'Màu đa dạng'],
     uses: ['Trang trí', 'Mỹ phẩm & bánh kẹo'],
@@ -51,6 +52,7 @@ const oemFeatures = [
 ]
 
 export default function HoaHongSayLanh() {
+  const { get } = usePageContent('hoa-hong-say-lanh')
   const [form, setForm] = useState({ name: '', company: '', country: '', product_type: '', quantity: '', email: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
@@ -98,11 +100,12 @@ export default function HoaHongSayLanh() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-black text-gray-900 leading-tight mb-4">
-                Hoa hồng sấy lạnh cao cấp –<br />
+                {get('hero_title', 'Hoa hồng sấy lạnh cao cấp –')}
+                <br />
                 <span className="text-[#6B2200]">Giữ nguyên vẻ đẹp tự nhiên, xuất khẩu toàn cầu</span>
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Sản phẩm hoa hồng sấy bằng công nghệ hiện đại, giữ nguyên màu sắc và hình dáng, phù hợp quà tặng, decor và OEM. Xuất xứ Việt Nam, chất lượng quốc tế.
+              <p className="text-gray-600 leading-relaxed mb-6 whitespace-pre-line">
+                {get('hero_desc', 'Sản phẩm hoa hồng sấy bằng công nghệ hiện đại, giữ nguyên màu sắc và hình dáng, phù hợp quà tặng, decor và OEM. Xuất xứ Việt Nam, chất lượng quốc tế.')}
               </p>
               <div className="flex flex-wrap gap-3">
                 <a href="#lead-form" className="bg-[#c41e3a] text-white px-6 py-3 font-bold hover:bg-red-700 transition-colors inline-flex items-center gap-2">
@@ -115,7 +118,7 @@ export default function HoaHongSayLanh() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=700&q=80"
+                src={get('hero_image', 'https://images.unsplash.com/photo-1567515175297-ae6359e5b187?w=700&q=80')}
                 alt="Hoa hồng sấy lạnh"
                 className="rounded-lg shadow-xl w-full object-cover"
                 style={{ height: '360px' }}
@@ -208,7 +211,7 @@ export default function HoaHongSayLanh() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1490750967868-88df5691cc61?w=700&q=80"
+                src="https://images.unsplash.com/photo-1607500105153-2da3f8c83050?w=700&q=80"
                 alt="Công nghệ sấy lạnh hoa hồng"
                 className="rounded-lg shadow-xl w-full object-cover"
                 style={{ height: '360px' }}

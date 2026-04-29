@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiCheck } from 'react-icons/fi'
+import { usePageContent } from '../hooks/usePageContent'
 
 const products = [
   {
@@ -38,6 +39,7 @@ const specs = [
 ]
 
 export default function GangTayYTe() {
+  const { get } = usePageContent('gang-tay-y-te')
   return (
     <div>
       {/* Page header */}
@@ -58,11 +60,8 @@ export default function GangTayYTe() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="section-heading">Tổng Quan</h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Chúng tôi cung cấp các loại găng tay dùng trong <strong>y tế, thực phẩm và công nghiệp</strong> với chất lượng ổn định, phù hợp xuất khẩu sang thị trường EU, Mỹ, Trung Đông và châu Á.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Nguồn hàng kết nối trực tiếp nhà máy tại Việt Nam – đảm bảo giá cạnh tranh, số lượng ổn định và hỗ trợ OEM theo yêu cầu.
+              <p className="text-gray-600 leading-relaxed mb-6 whitespace-pre-line">
+                {get('overview_text', 'Chúng tôi cung cấp các loại găng tay dùng trong y tế, thực phẩm và công nghiệp với chất lượng ổn định, phù hợp xuất khẩu sang thị trường EU, Mỹ, Trung Đông và châu Á.\n\nNguồn hàng kết nối trực tiếp nhà máy tại Việt Nam – đảm bảo giá cạnh tranh, số lượng ổn định và hỗ trợ OEM theo yêu cầu.')}
               </p>
               <Link to="/lien-he" className="btn-primary inline-flex items-center gap-2">
                 Nhận báo giá ngay <FiArrowRight />
@@ -70,7 +69,7 @@ export default function GangTayYTe() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=700&q=80"
+                src={get('hero_image', 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=700&q=80')}
                 alt="Găng tay y tế"
                 className="rounded-lg shadow-lg w-full object-cover"
                 style={{ height: '320px' }}

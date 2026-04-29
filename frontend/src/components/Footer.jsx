@@ -94,8 +94,9 @@ export default function Footer() {
               Tel: +84 961 393 370 &nbsp;–&nbsp; Email: trosiegardenks@gmail.com
             </div>
           </div>
-          <div className="text-xs text-gray-600 mt-2">
-            Copyright © 2024. Trosie Global All Rights Reserved.
+          <div className="text-xs text-gray-600 mt-2 flex items-center justify-between">
+            <span>Copyright © 2024. Trosie Global All Rights Reserved.</span>
+            <Link to="/admin/login" className="text-gray-700 hover:text-gray-500 transition-colors text-xs">admin</Link>
           </div>
         </div>
       </div>

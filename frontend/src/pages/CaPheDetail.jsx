@@ -1,17 +1,33 @@
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiCheck } from 'react-icons/fi'
+import { usePageContent } from '../hooks/usePageContent'
 
 const products = [
   {
     name: 'Arabica',
     features: ['Hương thơm nhẹ', 'Vị chua thanh', 'Độ axit cao', 'Hàm lượng caffeine thấp hơn'],
-    image: 'https://images.unsplash.com/photo-1672570050756-4f1953bde478?w=500&q=80',
+    image: '/assets/coffee/z7769410562922_2870511915b461fbdff95a3f53198518.jpg',
   },
   {
     name: 'Robusta',
     features: ['Vị đậm', 'Hàm lượng caffeine cao', 'Độ đắng đặc trưng', 'Phù hợp espresso'],
-    image: 'https://images.unsplash.com/photo-1442550528053-c431ecb55509?w=500&q=80',
+    image: '/assets/coffee/z7769410670337_e1a6143ef9f8b7a9697e97e19e778089.jpg',
   },
+]
+
+const galleryImages = [
+  '/assets/coffee/z7769410508842_d4d78016b2b4c0c1b457ead632b8a36f.jpg',
+  '/assets/coffee/z7769410722314_152b90ff1f2aac6ebabb8d309ade9524.jpg',
+  '/assets/coffee/z7769410829082_ae876ef6ce19e5cae48e7845ab0b7ddd.jpg',
+  '/assets/coffee/z7769411546478_b6e85efa4db4abafc21c0f0d4eb5e94a.jpg',
+  '/assets/coffee/z7769411621636_422c6bda540278f7da8b5a1cf104a553.jpg',
+  '/assets/coffee/z7769411726182_75ee18e54c67657f3833f93afc0e8209.jpg',
+  '/assets/coffee/z7769411808261_52226e8383f4cc88c5c63c3efac79adb.jpg',
+  '/assets/coffee/z7769412505076_9a24551813e5d1efdf2e5f6f79406624.jpg',
+  '/assets/coffee/z7769412588051_c3a2cfe3432b344b0800b7860c015d8f.jpg',
+  '/assets/coffee/z7769412668626_9942cab7cc08443d78ebb0d8f098dc25.jpg',
+  '/assets/coffee/z7769412717262_694280ca5f2a45afd44839b105a7e1bb.jpg',
+  '/assets/coffee/z7769412827878_67cace81cc6c244bd90f15b16b189a7e.jpg',
 ]
 
 const forms = ['Cà phê nhân xanh', 'Cà phê rang']
@@ -19,6 +35,7 @@ const processing = ['Natural (chế biến khô)', 'Washed (chế biến ướt)
 const advantages = ['Nguồn nguyên liệu ổn định', 'Chất lượng đồng đều', 'Phù hợp xuất khẩu', 'Trồng tại Khe Sanh – vùng khí hậu lý tưởng']
 
 export default function CaPheDetail() {
+  const { get } = usePageContent('ca-phe')
   return (
     <div>
       {/* Page header */}
@@ -38,12 +55,9 @@ export default function CaPheDetail() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="section-heading">Cà Phê Từ Khe Sanh</h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Cà phê Trosie được trồng tại <strong>Khe Sanh – vùng có khí hậu lý tưởng</strong> cho chất lượng hạt cao cấp, với độ cao, nhiệt độ và lượng mưa phù hợp tạo ra hương vị đặc trưng.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Chúng tôi cung cấp cà phê nhân xanh và cà phê rang với các phương pháp chế biến đa dạng, phù hợp cho thị trường châu Á, châu Âu và Bắc Mỹ.
+              <h2 className="section-heading">{get('overview_title', 'Cà Phê Từ Khe Sanh')}</h2>
+              <p className="text-gray-600 leading-relaxed mb-6 whitespace-pre-line">
+                {get('overview_text', 'Cà phê Trosie được trồng tại Khe Sanh – vùng có khí hậu lý tưởng cho chất lượng hạt cao cấp. Chúng tôi cung cấp cà phê nhân xanh và cà phê rang với các phương pháp chế biến đa dạng, phù hợp cho thị trường châu Á, châu Âu và Bắc Mỹ.')}
               </p>
               <Link to="/lien-he" className="btn-primary inline-flex items-center gap-2">
                 Nhận báo giá ngay <FiArrowRight />
@@ -51,7 +65,7 @@ export default function CaPheDetail() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1663125365404-e274869480f6?w=700&q=80"
+                src={get('hero_image', '/assets/coffee/z7769410508842_d4d78016b2b4c0c1b457ead632b8a36f.jpg')}
                 alt="Cà phê Khe Sanh"
                 className="rounded-lg shadow-lg w-full object-cover"
                 style={{ height: '320px' }}
@@ -128,17 +142,17 @@ export default function CaPheDetail() {
       </section>
 
       {/* Gallery */}
-      <section className="py-8 bg-gray-50">
+      <section className="py-10 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              'https://images.unsplash.com/photo-1588317303094-d859b315ce70?w=400&q=80',
-              'https://images.unsplash.com/photo-1588317283112-f4d3a381e065?w=400&q=80',
-              'https://images.unsplash.com/photo-1663125365422-dab15325277a?w=400&q=80',
-              'https://images.unsplash.com/photo-1672570050756-4f1953bde478?w=400&q=80',
-            ].map((src, i) => (
-              <div key={i} className="overflow-hidden rounded">
-                <img src={src} alt={`Cà phê ${i + 1}`} className="w-full h-40 object-cover hover:scale-105 transition-transform duration-300" />
+          <h2 className="section-heading center text-center mb-8">HÌNH ẢNH SẢN PHẨM</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {galleryImages.map((src, i) => (
+              <div key={i} className="overflow-hidden rounded-lg shadow-sm">
+                <img
+                  src={src}
+                  alt={`Cà phê Khe Sanh ${i + 1}`}
+                  className="w-full h-44 object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
             ))}
           </div>

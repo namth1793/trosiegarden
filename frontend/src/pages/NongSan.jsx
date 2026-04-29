@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FiArrowRight, FiCheck } from 'react-icons/fi'
+import { usePageContent } from '../hooks/usePageContent'
 
 const driedProducts = [
   {
@@ -22,6 +23,7 @@ const driedProducts = [
 const advantages = ['Nguồn trực tiếp từ vùng trồng', 'Kiểm soát chất lượng nghiêm ngặt', 'Giá cạnh tranh', 'Đóng gói phù hợp xuất khẩu']
 
 export default function NongSan() {
+  const { get } = usePageContent('nong-san')
   return (
     <div>
       {/* Page header */}
@@ -42,11 +44,8 @@ export default function NongSan() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="section-heading">Nông Sản Việt Nam Đạt Chuẩn Xuất Khẩu</h2>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Chúng tôi cung cấp <strong>nông sản Việt Nam</strong> đạt tiêu chuẩn xuất khẩu, bao gồm trái cây sấy và trái cây tươi theo mùa.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Nguồn hàng kết nối trực tiếp với vùng trồng, đảm bảo nguyên liệu tươi ngon, quy trình chế biến hiện đại và đóng gói phù hợp tiêu chuẩn quốc tế.
+              <p className="text-gray-600 leading-relaxed mb-6 whitespace-pre-line">
+                {get('overview_text', 'Chúng tôi cung cấp nông sản Việt Nam đạt tiêu chuẩn xuất khẩu, bao gồm trái cây sấy và trái cây tươi theo mùa.\n\nNguồn hàng kết nối trực tiếp với vùng trồng, đảm bảo nguyên liệu tươi ngon, quy trình chế biến hiện đại và đóng gói phù hợp tiêu chuẩn quốc tế.')}
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link to="/lien-he" className="btn-primary inline-flex items-center gap-2">
@@ -59,7 +58,7 @@ export default function NongSan() {
             </div>
             <div>
               <img
-                src="https://images.unsplash.com/photo-1770124129809-fe1fe6b7c23e?w=700&q=80"
+                src={get('hero_image', 'https://images.unsplash.com/photo-1770124129809-fe1fe6b7c23e?w=700&q=80')}
                 alt="Nông sản xuất khẩu"
                 className="rounded-lg shadow-lg w-full object-cover"
                 style={{ height: '320px' }}

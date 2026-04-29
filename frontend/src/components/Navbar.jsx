@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { FiChevronDown, FiMenu, FiPhone, FiSearch, FiX } from 'react-icons/fi'
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { FiPhone, FiSearch, FiMenu, FiX, FiChevronDown } from 'react-icons/fi'
 
 const navLinks = [
   { label: 'TRANG CHỦ', to: '/' },
@@ -72,7 +72,6 @@ export default function Navbar() {
             <div className="hidden sm:block">
               <div className="text-[#6B2200] font-bold text-base leading-tight uppercase">CÔNG TY TNHH XUẤT NHẬP KHẨU</div>
               <div className="text-[#6B2200] font-bold text-base leading-tight uppercase">VÀ THƯƠNG MẠI TROSIE</div>
-              <div className="text-gray-500 text-xs">TROSIE GLOBAL</div>
             </div>
           </Link>
 

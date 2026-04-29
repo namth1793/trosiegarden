@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import { useEffect, useState } from 'react'
 import { FiArrowRight, FiCheck } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
+import { usePageContent } from '../hooks/usePageContent'
 import 'swiper/css'
-import 'swiper/css/pagination'
 import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 const bannersFallback = [
   { image: 'https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=1600&q=80', link: '/gang-tay-y-te' },
@@ -20,35 +21,30 @@ const productCategories = [
     desc: 'Giải pháp bảo hộ cho y tế, thực phẩm và công nghiệp',
     image: 'https://images.unsplash.com/photo-1599412227383-b7d4751c8765?w=600&q=80',
     to: '/gang-tay-y-te',
-    icon: '🧤',
   },
   {
     name: 'Cà Phê',
     desc: 'Arabica & Robusta từ Khe Sanh',
     image: 'https://images.unsplash.com/photo-1672570050756-4f1953bde478?w=600&q=80',
     to: '/ca-phe',
-    icon: '☕',
   },
   {
     name: 'Nông Sản',
     desc: 'Trái cây tươi & sấy xuất khẩu',
     image: 'https://images.unsplash.com/photo-1762884601729-0eeeafbdfb8a?w=600&q=80',
     to: '/nong-san',
-    icon: '🌿',
   },
   {
     name: 'Than Không Khói',
     desc: 'Cháy lâu 2–4h, phù hợp BBQ, shisha & nhà hàng',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1648090228825-e8fabeb09750?w=600&q=80',
     to: '/than-khong-khoi',
-    icon: '🔥',
   },
   {
     name: 'Hoa Hồng Sấy Lạnh',
     desc: 'Giữ màu tự nhiên, phù hợp quà tặng, decor & OEM',
-    image: 'https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=600&q=80',
+    image: 'https://images.unsplash.com/photo-1567515175297-ae6359e5b187?w=600&q=80',
     to: '/hoa-hong-say-lanh',
-    icon: '🌹',
   },
 ]
 
@@ -67,6 +63,7 @@ const activityImages = [
 ]
 
 export default function Home() {
+  const { get } = usePageContent('home')
   const [banners, setBanners] = useState(bannersFallback)
   const [news, setNews] = useState([])
 
@@ -130,8 +127,8 @@ export default function Home() {
       {/* ===== GIỚI THIỆU NHANH ===== */}
       <section className="bg-[#6B2200] py-8">
         <div className="max-w-[1200px] mx-auto px-4 text-center">
-          <p className="text-white text-lg leading-relaxed max-w-3xl mx-auto">
-            Chúng tôi chuyên cung cấp <strong>găng tay y tế, cà phê và nông sản Việt Nam</strong>, kết nối trực tiếp nhà máy và nông trại với khách hàng toàn cầu.
+          <p className="text-white text-lg leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
+            {get('intro_text', 'Chúng tôi chuyên cung cấp găng tay y tế, cà phê và nông sản Việt Nam, kết nối trực tiếp nhà máy và nông trại với khách hàng toàn cầu.')}
           </p>
         </div>
       </section>

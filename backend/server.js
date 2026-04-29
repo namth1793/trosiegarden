@@ -1,107 +1,143 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const fs = require('fs');
-const Database = require('better-sqlite3');
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
+const path = require('path')
+const fs = require('fs')
+const Database = require('better-sqlite3')
 
-const app = express();
-const PORT = process.env.PORT || 5013;
+const app = express()
+const PORT = process.env.PORT || 5013
 
-app.use(cors());
-app.use(express.json());
+app.use(cors())
+app.use(express.json())
 
-const dataDir = path.join(__dirname, 'data');
-if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+const dataDir = path.join(__dirname, 'data')
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
 
-const dbPath = path.join(dataDir, 'xnk.db');
+const dbPath = path.join(dataDir, 'xnk.db')
 if (!fs.existsSync(dbPath)) {
-  require('./db/seed.js');
+  require('./db/seed.js')
+} else {
+  // Ensure new tables exist even if DB was created before this version
+  const _db = new Database(dbPath)
+  _db.exec(`
+    CREATE TABLE IF NOT EXISTS admins (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      username TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE TABLE IF NOT EXISTS page_content (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      page TEXT NOT NULL,
+      key TEXT NOT NULL,
+      value TEXT DEFAULT '',
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      UNIQUE(page, key)
+    );
+  `)
+  // Ensure default admin exists
+  const adminExists = _db.prepare('SELECT id FROM admins WHERE username = ?').get('admin')
+  if (!adminExists) {
+    const bcrypt = require('bcryptjs')
+    _db.prepare('INSERT INTO admins (username, password) VALUES (?, ?)').run('admin', bcrypt.hashSync('admin123', 10))
+  }
+  _db.close()
 }
 
-const db = new Database(dbPath);
+const db = new Database(dbPath)
+
+// ─── PUBLIC ROUTES ────────────────────────────────────────
+
+// Page content (public - used by product pages)
+app.get('/api/content/:page', (req, res) => {
+  const rows = db.prepare('SELECT key, value FROM page_content WHERE page = ?').all(req.params.page)
+  const obj = {}
+  rows.forEach(r => { obj[r.key] = r.value })
+  res.json(obj)
+})
 
 // Products
 app.get('/api/products', (req, res) => {
-  const { category, limit } = req.query;
-  let query = 'SELECT * FROM products';
-  const params = [];
+  const { category, limit } = req.query
+  let query = 'SELECT * FROM products'
+  const params = []
   if (category) {
-    query += ' WHERE category = ?';
-    params.push(category);
+    query += ' WHERE category = ?'
+    params.push(category)
   }
-  query += ' ORDER BY created_at DESC';
+  query += ' ORDER BY created_at DESC'
   if (limit) {
-    query += ' LIMIT ?';
-    params.push(parseInt(limit));
+    query += ' LIMIT ?'
+    params.push(parseInt(limit))
   }
-  res.json(db.prepare(query).all(...params));
-});
+  res.json(db.prepare(query).all(...params))
+})
 
 app.get('/api/products/:slug', (req, res) => {
-  const product = db.prepare('SELECT * FROM products WHERE slug = ?').get(req.params.slug);
-  if (!product) return res.status(404).json({ error: 'Not found' });
-  res.json(product);
-});
+  const product = db.prepare('SELECT * FROM products WHERE slug = ?').get(req.params.slug)
+  if (!product) return res.status(404).json({ error: 'Not found' })
+  res.json(product)
+})
 
 app.get('/api/categories', (req, res) => {
-  const categories = db.prepare('SELECT DISTINCT category, COUNT(*) as count FROM products GROUP BY category').all();
+  const categories = db.prepare('SELECT DISTINCT category, COUNT(*) as count FROM products GROUP BY category').all()
   const labels = {
-    'arabica': 'Arabica',
-    'robusta': 'Robusta',
-    'specialty': 'Đặc Sản',
-    'xay': 'Cà Phê Xay',
-    'hoa-tan': 'Hòa Tan',
-    'xanh': 'Nhân Xanh',
-    'cascara': 'Cascara',
-    'chon': 'Cà Phê Chồn',
-  };
-  res.json(categories.map(c => ({ ...c, label: labels[c.category] || c.category })));
-});
+    arabica: 'Arabica', robusta: 'Robusta', specialty: 'Đặc Sản',
+    xay: 'Cà Phê Xay', 'hoa-tan': 'Hòa Tan', xanh: 'Nhân Xanh',
+    cascara: 'Cascara', chon: 'Cà Phê Chồn',
+  }
+  res.json(categories.map(c => ({ ...c, label: labels[c.category] || c.category })))
+})
 
 // News
 app.get('/api/news', (req, res) => {
-  const { category, limit } = req.query;
-  let query = 'SELECT id, title, slug, category, summary, image, author, created_at FROM news';
-  const params = [];
+  const { category, limit } = req.query
+  let query = 'SELECT id, title, slug, category, summary, image, author, created_at FROM news'
+  const params = []
   if (category) {
-    query += ' WHERE category = ?';
-    params.push(category);
+    query += ' WHERE category = ?'
+    params.push(category)
   }
-  query += ' ORDER BY created_at DESC';
+  query += ' ORDER BY created_at DESC'
   if (limit) {
-    query += ' LIMIT ?';
-    params.push(parseInt(limit));
+    query += ' LIMIT ?'
+    params.push(parseInt(limit))
   }
-  res.json(db.prepare(query).all(...params));
-});
+  res.json(db.prepare(query).all(...params))
+})
 
 app.get('/api/news/:slug', (req, res) => {
-  const article = db.prepare('SELECT * FROM news WHERE slug = ?').get(req.params.slug);
-  if (!article) return res.status(404).json({ error: 'Not found' });
-  res.json(article);
-});
+  const article = db.prepare('SELECT * FROM news WHERE slug = ?').get(req.params.slug)
+  if (!article) return res.status(404).json({ error: 'Not found' })
+  res.json(article)
+})
 
 // Banners
 app.get('/api/banners', (req, res) => {
-  res.json(db.prepare('SELECT * FROM banners ORDER BY sort_order').all());
-});
+  res.json(db.prepare('SELECT * FROM banners ORDER BY sort_order').all())
+})
 
 // Contact
 app.post('/api/contacts', (req, res) => {
-  const { name, email, phone, company, subject, message } = req.body;
+  const { name, email, phone, company, subject, message } = req.body
   if (!name || !email || !message) {
-    return res.status(400).json({ error: 'Vui lòng điền đầy đủ thông tin bắt buộc' });
+    return res.status(400).json({ error: 'Vui lòng điền đầy đủ thông tin bắt buộc' })
   }
   const result = db.prepare(
     'INSERT INTO contacts (name, email, phone, company, subject, message) VALUES (?, ?, ?, ?, ?, ?)'
-  ).run(name, email, phone || '', company || '', subject || '', message);
-  res.json({ success: true, id: result.lastInsertRowid });
-});
+  ).run(name, email, phone || '', company || '', subject || '', message)
+  res.json({ success: true, id: result.lastInsertRowid })
+})
 
 app.get('/api/contacts', (req, res) => {
-  res.json(db.prepare('SELECT * FROM contacts ORDER BY created_at DESC').all());
-});
+  res.json(db.prepare('SELECT * FROM contacts ORDER BY created_at DESC').all())
+})
+
+// ─── ADMIN ROUTES ─────────────────────────────────────────
+const adminRoutes = require('./routes/adminRoutes')(db)
+app.use('/api/admin', adminRoutes)
 
 app.listen(PORT, () => {
-  console.log(`✅ TROSIE GARDEN Backend running on http://localhost:${PORT}`);
-});
+  console.log(`✅ TROSIE XNK Backend running on http://localhost:${PORT}`)
+})

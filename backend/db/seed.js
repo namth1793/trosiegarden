@@ -1,4 +1,5 @@
 const Database = require('better-sqlite3');
+const bcrypt = require('bcryptjs');
 const path = require('path');
 const fs = require('fs');
 
@@ -53,7 +54,30 @@ db.exec(`
     link TEXT,
     sort_order INTEGER DEFAULT 0
   );
+
+  CREATE TABLE IF NOT EXISTS admins (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  CREATE TABLE IF NOT EXISTS page_content (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    page TEXT NOT NULL,
+    key TEXT NOT NULL,
+    value TEXT DEFAULT '',
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(page, key)
+  );
 `);
+
+// Seed default admin only if none exists
+const adminExists = db.prepare('SELECT id FROM admins WHERE username = ?').get('admin');
+if (!adminExists) {
+  const hash = bcrypt.hashSync('admin123', 10);
+  db.prepare('INSERT INTO admins (username, password) VALUES (?, ?)').run('admin', hash);
+}
 
 db.exec(`DELETE FROM products; DELETE FROM news; DELETE FROM banners;`);
 
